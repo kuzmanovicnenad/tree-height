@@ -62,7 +62,7 @@ function treeHeight(tree) {
     }
 }
 
-// Each node shows the parents index.
+// Each node shows parents index
 // App will break if data is invalid
 let tree = [1, -1, 0, 0, 0, 4, 5];
 let heights = new Array(tree.length);
