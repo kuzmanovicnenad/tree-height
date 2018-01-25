@@ -25,12 +25,12 @@ function visitParent(parentIndex) {
 }
 
 /**
- * Find tree depth
+ * Find tree height
  *
  * @param tree
  * @returns {number}
  */
-function treeDepth(tree) {
+function treeHeight(tree) {
 
     try {
 
@@ -68,4 +68,4 @@ let tree = [1, -1, 0, 0, 0, 4, 5];
 let heights = new Array(tree.length);
 
 console.log('Tree:', tree);
-console.log('Height:', treeDepth(tree));
+console.log('Height:', treeHeight(tree));
