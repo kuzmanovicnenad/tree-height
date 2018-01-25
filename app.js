@@ -1,13 +1,13 @@
-let tree = [1, -1, 0, 0, 0, 4, 5];
-//let tree = [-1, 6, 0, 0, 0, 4, 5];
-let heights = new Array(tree.length);
-let visited = new Array(tree.length);
 
-let max = 0;
-
+/**
+ * Check for parents height
+ *
+ * @param parentIndex
+ * @returns {*}
+ */
 function visitParent(parentIndex) {
 
-    if (visited[parentIndex]) {
+    if (heights[parentIndex]) {
 
         return heights[parentIndex];
 
@@ -16,33 +16,56 @@ function visitParent(parentIndex) {
         return 1;
 
     } else {
-        heights[parentIndex] = visitParent(tree[parentIndex]) + 1;
-        visited[parentIndex] = true;
 
+        heights[parentIndex] = visitParent(tree[parentIndex]) + 1;
         return heights[parentIndex];
+
     }
 
 }
 
-tree.forEach((node, index) => {
+/**
+ * Find tree depth
+ *
+ * @param tree
+ * @returns {number}
+ */
+function treeDepth(tree) {
 
-    if (node === -1) {
+    try {
 
-        heights[index] = 1;
+        let height = 0;
 
-    } else {
+        tree.forEach((node, index) => {
 
-        heights[index] = visitParent(node) + 1;
+            if (node === -1) {
 
+                heights[index] = 1;
+
+            } else {
+
+                heights[index] = visitParent(node) + 1;
+
+            }
+
+            if (heights[index] > height) {
+                height = heights[index];
+            }
+
+        });
+
+        return height;
+
+    } catch (err) {
+        console.log('Invalid data in tree array. Probably circular dependencies\n');
+        console.log(err);
     }
+}
 
-    visited[index] = true;
+// Each node shows the parents index.
+// App will break if data is invalid
+let tree = [1, -1, 0, 0, 0, 4, 5];
+let heights = new Array(tree.length);
 
-    if (heights[index] > max) {
-        max = heights[index];
-    }
-
-
-});
-
-console.log('height', heights);
+console.log('Tree:', tree);
+console.log('Height:', treeDepth(tree));
